@@ -1,6 +1,7 @@
 % Section 2 - Core library
+% Roberto Masocco <roberto.masocco@uniroma2.it>
 % Alessandro Tenaglia <alessandro.tenaglia@uniroma2.it>
-% May 6, 2022
+% June 5, 2024
 
 % ### Core library ###
 \section{Core library}
@@ -8,21 +9,19 @@
 
 % --- Code organisation ---
 \begin{frame}{Code organisation}
-	One of the main features of the MARTe2 architecture is the bold separation between:
+	One of the main features of the MARTe2 architecture is the \textbg{decoupling} of:
 	\begin{itemize}
-		\item<1-> the platform \textbg{architecture}, i.e. x86, armv8;
-		\item<2-> the \textbg{environment} details, i.e. Linux, FreeRTOS, Windows;
-		\item<3-> the \textbg{real-time algorithms}, i.e. the user code;
+		\item the platform \textbg{architecture}, \emph{i.e.}, \texttt{x86}, \texttt{armv8}...
+		\item the \textbg{environment} details, \emph{i.e.}, Linux, FreeRTOS, Windows;
+		\item the \textbg{real-time algorithms}, \emph{i.e.}, the user code.
 	\end{itemize}
 \end{frame}
-
-% --- Code organisation ---
 \begin{frame}{Code organisation}
 	\begin{figure}
 		\centering
 		\includegraphics[scale=.35]{Tiers.png}
 		\label{fig:tiers}
-		\caption{Code library}
+		\caption{Core libraries organization.}
 	\end{figure}
 \end{frame}
 
@@ -30,18 +29,18 @@
 \begin{frame}{Makefile}
 	\begin{columns}
 		\column{.5\textwidth}
-		The build of the core library (and all MARTe2 base projects) follows this structure:
-		\begin{itemize}
-			\item<1-> The \textbg{Makefile.os-arch} defines the \textbg{TARGET} operating system and architecture;
-			\item<2-> The \textbg{Makefile.inc} defines all the common rules;
-			\item<3-> The \textbg{MakeDefaults} defines the specific rules for the \textbg{TARGET};
-		\end{itemize}
+		The build of the core library, as well as any MARTe2 project, follows this structure:
+		\begin{enumerate}
+			\item The \texttt{Makefile.os-arch} defines the \textbg{TARGET} operating system and architecture.
+			\item The \texttt{Makefile.inc} defines all the common rules.
+			\item The \texttt{MakeDefaults} defines the specific rules for the \textbg{TARGET}.
+		\end{enumerate}
 		\column{.5\textwidth}
 		\begin{figure}
 			\centering
-			\includegraphics[scale=.3]{Makefiles.png}
+			\includegraphics[scale=.4]{Makefiles.png}
 			\label{fig:makefiles}
-			\caption{Makefile structure, \\ from bottom to top}
+			\caption{Makefile structure (bottom to top).}
 		\end{figure}
 	\end{columns}
 \end{frame}

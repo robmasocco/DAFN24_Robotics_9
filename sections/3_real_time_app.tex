@@ -1,6 +1,7 @@
 % Section 3 - Real-Time Applications
+% Roberto Masocco <roberto.masocco@uniroma2.it>
 % Alessandro Tenaglia <alessandro.tenaglia@uniroma2.it>
-% May 6, 2022
+% June 5, 2024
 
 % ### Real Time Applications ###
 \section{Real-Time Applications}
@@ -8,17 +9,17 @@
 
 % --- Real-Time Applications ---
 \begin{frame}{Real-Time Applications}
-	\begin{itemize}
-		\item MARTe2 offers a generic base application, see \textbg{MARTeApp.cpp};
-		\item Real-Time Applications are built from the base one through a \textbg{Configuration Files} (.cfg);
-		\item The \textbg{Configuration Files} defines the algorithms to be executed (\textbg{GAMs}) and the hardware or software involved (\textbg{Data Sources}).
-	\end{itemize}
+		MARTe2 offers a generic base application, see \texttt{MARTeApp.cpp}.\\
+    \bigskip
+		Real-Time Applications are built (more like "bootstrapped" or "put together") from the base one through \textbg{configuration files} (\texttt{.cfg}).\\
+    \bigskip
+		The \textbg{configuration files} define all the software components of a RTApp and their configuration properties, \emph{e.g.}, the algorithms to be executed (\textbg{GAMs}) and the hardware or software modules involved (\textbg{Data Sources}).
 \end{frame}
 
-% --- Configuration file: RT App ---
-\begin{frame}[fragile]{Configuration file: RT App}
+% --- Configuration file structure ---
+\begin{frame}[fragile]{Configuration file: RTApp}
 	\begin{columns}\column{.9\textwidth}
-		\begin{lstlisting}[style=small, language=cfg]
+		\begin{lstlisting}[style=small, language=cfg, caption=RTApp high-level configuration structure.]
 $RTApp = {
   Class = RealTimeApplication
   +Functions = { // GAMs
@@ -44,27 +45,29 @@ $RTApp = {
 \begin{frame}{GAMs}
 	\only<1,3>{
 		\begin{block}{Generic Application Module}
-			The \textbf{GAMs} are the components where user-algorithms are to be implemented.
+			The \textbf{GAMs} are the software components where \textbf{real-time user algorithms} must be implemented.
 		\end{block}
 	}
 	\only<2>{
 		\begin{figure}
 			\centering
-			\includegraphics[scale=.33]{GAMs.png}
+			\includegraphics[scale=.3]{GAMs.png}
 			\label{fig:gams}
-			\caption{GAM}
+			\caption{GAM operational scheme.}
 		\end{figure}
 	}
 	\only<3>{
-		\begin{alertblock}{Warning}
-			No interface with operating system (e.g. reading from files/sockets)
+		\begin{alertblock}{}
+      \centering
+			\textbr{They should not perform neither data I/O operations nor OS calls\\(\emph{e.g.}, accessing files, network sockets, devices...).}
 		\end{alertblock}
 	}
 \end{frame}
 
-\begin{frame}[fragile]{Configuration file: GAMs}
+% --- Configuration file: GAM ---
+\begin{frame}[fragile]{Configuration file: GAM}
 	\begin{columns}\column{.8\textwidth}
-		\begin{lstlisting}[style=small, language=cfg]
+		\begin{lstlisting}[style=small, language=cfg, caption=GAM configuration structure.]
 +GAM1 = {
   Class = ExampleGAM
   InputSignals = {
@@ -86,26 +89,28 @@ $RTApp = {
 	\end{columns}
 \end{frame}
 
-% --- DataSoruces ---
-\begin{frame}{Data Sources \& Brokers}
-	\begin{block}{Data Sources}
-		The \textbf{Data Sources} are the components that provide a interface for the interchange of input and output signals with the memory and the hardware.
+% --- DataSources & Brokers ---
+\begin{frame}{DataSources \& Brokers}
+	\begin{block}{DataSources}
+		The \textbf{DataSources} are the software components that provide an interface for the \textbf{exchange of input and output signals data} with the memory and the hardware.
 	\end{block}
 	\begin{block}{Brokers}
-		The \textbf{Brokers} are the components that provide the interface between the GAMs memory and the DataSource data.
+		The \textbf{Brokers} are the software components that provide the \textbf{interface between the GAMs and the DataSources memory areas}, exchanging data between the two.
 	\end{block}
+  \bigskip
 	\begin{figure}
 		\centering
 		\includegraphics[scale=.35]{DataSources.png}
 		\label{fig:datasources}
-		\caption{Data Sources \& Brokers}
+		\caption{DataSources and Brokers operational scheme.}
 	\end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Configuration file: Data Sources}
+% --- Configuration file: DataSource ---
+\begin{frame}[fragile]{Configuration file: DataSource}
 	\begin{columns}\column{.8\textwidth}
-		\begin{lstlisting}[style=small, language=cfg]
-+Data = { // Data Sources
+		\begin{lstlisting}[style=small, language=cfg, caption=DataSource configuration structure.]
++Data = { // Identifies DataSources section in the cfg
   Class = ReferenceContainer
   +DDB1 = {
     Class = GAMDataSource
@@ -121,7 +126,6 @@ $RTApp = {
         Type = uint32
       }
     }
-	...
   }
 }\end{lstlisting}
 	\end{columns}
@@ -129,24 +133,25 @@ $RTApp = {
 
 % --- States ---
 \begin{frame}{States}
-	\begin{itemize}
-		\item \textbg{GAMs} are grouped in real-time \textbg{threads} which are executed in the context of specific \textbg{states}.
-		\item A Real-Time application shall be in one (\textbf{and only one}) state at a given time.
-	\end{itemize}
+		\textbg{GAMs} are grouped in \textbg{real-time threads} which are executed in the context of specific \textbg{states}.\\
+    \bigskip
+		A Real-Time Application shall be in one (\textbg{and only one}) state at a given time.
 \end{frame}
+
+% --- Configuration file: States ---
 \begin{frame}[fragile]{Configuration file: States}
 	\begin{columns}\column{.8\textwidth}
-		\begin{lstlisting}[style=small, language=cfg]
-+States = { // RT States
+		\begin{lstlisting}[style=small, language=cfg, caption=States section of a configuration file.]
++States = { // Identifies the States section
   Class = ReferenceContainer
-  +State1 = {
+  +State1 = { // For every state, multiple threads
     Class = RealTimeState
     +Threads = {
       Class = ReferenceContainer
       +Thread1 = {
         Class = RealTimeThread
-        CPUs = 0x8
-        Functions = {GAMTimer}
+        CPUs = 0x8 // CPU affinity
+        Functions = {GAMTimer, ...} // Multiple GAMs
       }
       ...
     }
@@ -156,27 +161,25 @@ $RTApp = {
 	\end{columns}
 \end{frame}
 
-% --- Scheduler ---
+% --- Configuration file: Scheduler ---
 \begin{frame}[fragile]{Configuration file: Scheduler}
-	\begin{itemize}
-		\item A \textbg{real-time scheduler} handles thread execution;
-	\end{itemize}
+		A \textbg{real-time, OS-abstracting scheduler} handles the execution of real-time threads.
 	\vspace{1cm}
 	\begin{columns}\column{.8\textwidth}
-		\begin{lstlisting}[style=normal, language=cfg]
-+Scheduler = { // Scheduler
+		\begin{lstlisting}[style=normal, language=cfg, caption=Scheduler section of a configuration file.]
++Scheduler = { // Identifies the Scheduler section
   Class = GAMScheduler
   TimingDataSource = Timings
 }\end{lstlisting}
 	\end{columns}
 \end{frame}
 
-% --- RTApp  ---
+% --- Example: Real-Time Application  ---
 \begin{frame}{Example: Real-Time Application}
 	\begin{figure}
 		\centering
-		\includegraphics[width=\textwidth]{RTApp.png}
+		\includegraphics[width=.95\textwidth]{RTApp.png}
 		\label{fig:rtapp_example}
-		\caption{Example of a multi-state and multi-threaded real-time application}
+		\caption{Example of a multi-state and multi-threaded Real-Time Application.}
 	\end{figure}
 \end{frame}
