@@ -1,0 +1,103 @@
+<mxfile host="65bd71144e">
+    <diagram id="9BDRLqt76dtFbIrQ7sjx" name="Page-1">
+        <mxGraphModel dx="746" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="94BsapIy3oklP2jeuabq-1" value="&lt;span&gt;INITIAL&lt;/span&gt;" style="ellipse;shape=doubleEllipse;aspect=fixed;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;align=center;fontSize=13;strokeWidth=1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="200.15" y="80" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-2" value="&lt;span&gt;IDLE&lt;/span&gt;" style="ellipse;aspect=fixed;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;align=center;fontSize=13;strokeWidth=1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="200.15" y="200" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-3" value="&lt;span&gt;ERROR&lt;/span&gt;" style="ellipse;aspect=fixed;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;align=center;fontSize=13;strokeWidth=1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="560.15" y="320" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-4" value="&lt;span&gt;RUN&lt;/span&gt;" style="ellipse;aspect=fixed;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;whiteSpace=wrap;html=1;align=center;fontSize=13;strokeWidth=1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="200.15" y="430" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-6" value="START&amp;nbsp; / &lt;br style=&quot;font-size: 13px;&quot;&gt;1. PrepareChangeToIdleMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;  &amp;nbsp;&amp;nbsp; &amp;nbsp; 2. StartNextStateExecutionMsg" style="endArrow=classic;rounded=0;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-1" target="94BsapIy3oklP2jeuabq-2" edge="1">
+                    <mxGeometry x="-0.5" y="-120" width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="310.15" y="360" as="sourcePoint"/>
+                        <mxPoint x="360.15" y="310" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-12" value="" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-2" target="94BsapIy3oklP2jeuabq-4" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="290.15" y="290" as="sourcePoint"/>
+                        <mxPoint x="280.15" y="370" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="280.15" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-17" value="GOTORUN&amp;nbsp; /&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;1. PrepareChangeToRunMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;2. StopCurrentStateExecutionMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;3. StartNextStateExecutionMsg" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;fontSize=13;" parent="94BsapIy3oklP2jeuabq-12" vertex="1" connectable="0">
+                    <mxGeometry x="0.0539" y="-15" relative="1" as="geometry">
+                        <mxPoint x="96" y="-4" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-14" value="" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-4" target="94BsapIy3oklP2jeuabq-2" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="230.15" y="420" as="sourcePoint"/>
+                        <mxPoint x="280.15" y="370" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="200.15" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-20" value="GOTOIDLE&amp;nbsp; /&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;1. PrepareChangeToIdleMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;2. StopCurrentStateExecutionMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;3. StartNextStateExecutionMsg" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;fontSize=13;" parent="94BsapIy3oklP2jeuabq-14" vertex="1" connectable="0">
+                    <mxGeometry x="0.2179" y="-39" relative="1" as="geometry">
+                        <mxPoint x="-133" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-21" value="" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-4" target="94BsapIy3oklP2jeuabq-3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="260.15" y="450" as="sourcePoint"/>
+                        <mxPoint x="310.15" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-25" value="GOTOERROR" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];rotation=341;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;fontSize=13;" parent="94BsapIy3oklP2jeuabq-21" vertex="1" connectable="0">
+                    <mxGeometry x="-0.0912" y="-1" relative="1" as="geometry">
+                        <mxPoint x="13" y="15" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-22" value="" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="572.8657287525378" y="331.71572875253787" as="sourcePoint"/>
+                        <mxPoint x="280.37322702763674" y="232.15535459447267" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="460.15" y="220"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-26" value="RESET /&lt;br style=&quot;font-size: 13px;&quot;&gt;1. PrepareChangeToRunMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;2. StopCurrentStateExecutionMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;3. StartNextStateExecutionMsg" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;fontSize=13;" parent="94BsapIy3oklP2jeuabq-22" vertex="1" connectable="0">
+                    <mxGeometry x="-0.2479" y="33" relative="1" as="geometry">
+                        <mxPoint x="61" y="-52" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-23" value="" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-2" target="94BsapIy3oklP2jeuabq-3" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="260.15" y="450" as="sourcePoint"/>
+                        <mxPoint x="310.15" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-24" value="GOTOERROR" style="edgeLabel;align=center;verticalAlign=middle;resizable=0;points=[];rotation=19;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;fontSize=13;" parent="94BsapIy3oklP2jeuabq-23" vertex="1" connectable="0">
+                    <mxGeometry x="0.1111" y="-4" relative="1" as="geometry">
+                        <mxPoint x="-14" y="-29" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94BsapIy3oklP2jeuabq-27" value="ENTER /&lt;br style=&quot;font-size: 13px;&quot;&gt;1. PrepareChangeToRunMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;2. StopCurrentStateExecutionMsg&lt;br style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;3. StartNextStateExecutionMsg" style="endArrow=classic;curved=1;fontFamily=Times New Roman;labelBackgroundColor=none;labelBorderColor=none;html=1;align=center;fontSize=13;" parent="1" source="94BsapIy3oklP2jeuabq-3" target="94BsapIy3oklP2jeuabq-3" edge="1">
+                    <mxGeometry y="-50" width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="320.15" y="390" as="sourcePoint"/>
+                        <mxPoint x="370.15" y="340" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="600.15" y="420"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

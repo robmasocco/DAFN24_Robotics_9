@@ -1,0 +1,98 @@
+% Section 4 - State Machine
+% Alessandro Tenaglia <alessandro.tenaglia@uniroma2.it>
+% May 6, 2022
+
+% ### State Machine ###
+\section{State Machine}
+\graphicspath{{figs/section4/}}
+
+% --- State Machine ---
+\begin{frame}{State Machine}
+	\visible<1->{
+		\begin{block}{State Machine}
+			The \textbf{State Machine} is a component used to synchronise the application states against the external environment.
+		\end{block}
+	}
+	\visible<2->{
+		\begin{itemize}
+			\item The State Machine can be in \textbf{one and only one} state at a given time.
+			\item The transitions between states are handled by \textbg{Events};
+			\item The State Machine components allows to associate the sending of \textbg{Messages} to \textbg{Events};
+		\end{itemize}
+	}
+	\visible<3->{
+		\begin{alertblock}{Warning}
+			Be careful not to confuse the states of the \textbr{Real-Time application} with the states of the \textbr{State Machine}!
+		\end{alertblock}
+	}
+\end{frame}
+
+\begin{frame}{Example: State Machine}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=.45]{statemachine.png}
+		\label{fig:statemachine}
+		\caption{State Machine diagram}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Configuration file: State Machine}
+	\begin{columns}\column{.9\textwidth}
+		\begin{lstlisting}[style=normal, language=cfg]
++FSM = {
+    Class = StateMachine
+    +STATE1 = {
+        Class = ReferenceContainer
+        +GOTOSTATE2 = {
+            Class = StateMachineEvent
+            ...
+        }
+    }
+    +STATE2 = {
+        Class = ReferenceContainer
+        +GOTOSTATE1 = {
+            Class = StateMachineEvent
+            ...
+        }
+    }
+}\end{lstlisting}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{State Machine Event}
+	A \textbg{StateMachineEvent} represents a transition and defines:
+	\begin{itemize}
+		\item \textbg{NextState}, the next state to pass through;
+		\item \textbg{NextStateError}, the state to pass through on error;
+		\item One or more \textbg{Messages} to send when is triggered:
+		      \begin{itemize}
+			      \item PrepareNextState:
+			      \item StopCurrentStateExecution:
+			      \item StartNextStateExecution:
+		      \end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Configuration file: State Machine}
+	\begin{columns}\column{.9\textwidth}
+		\begin{lstlisting}[style=normal, language=cfg]
++GOTOSTATE2 = {
+    Class = StateMachineEvent
+    NextState = STATE2
+    NextStateError = ERROR
+    +PrepareChangeToState2Msg = {
+        Class = Message
+        Function = PrepareNextState
+    }
+    +StopCurrentStateExecutionMsg = {
+        Class = Message
+        Function = StopCurrentStateExecution
+    }
+    +StartNextStateExecutionMsg = {
+        Class = Message
+        Function = StartNextStateExecution
+    }
+}\end{lstlisting}
+	\end{columns}
+\end{frame}
+
